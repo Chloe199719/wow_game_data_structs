@@ -31,54 +31,41 @@
 //     equipped: Vec<Item>,
 //     inventory_size: u8,
 // } 
-// struct Class {
-//     name: ClassName,
-//     description: String,
-//     specializations: Vec<Specialization>,
-//     spells: Vec<Spell>,
-//     talents: Vec<Talent>,
 
-// }
-enum ClassName {
-    Warrior,
-    Paladin,
-    Hunter,
-    Rogue,
-    Priest,
-    DeathKnight,
-    Shaman,
-    Mage,
-    Warlock,
-    Monk,
-    Druid,
-    DemonHunter,
-} 
+// enum ClassName {
+//     Warrior,
+//     Paladin,
+//     Hunter,
+//     Rogue,
+//     Priest,
+//     DeathKnight,
+//     Shaman,
+//     Mage,
+//     Warlock,
+//     Monk,
+//     Druid,
+//     DemonHunter,
+// } 
 
 
 
 
 use std::collections::HashMap;
 
+use wow_char::Class;
+use wow_char::ClassName;
 use wow_char::races::Race;
 use wow_char::races::RaceTraits;
 use wow_char::specs::SpecializationStruct;
 use wow_char::specs::Specialization;
-use wow_char::Spell;
-use wow_char::Value;
+use wow_char::spells::Spell;
+use wow_char::spells::Value;
 use wow_char::Resource;
 fn main() {
     let bloodelf  = RaceTraits::new(Race::BloodElf);
-    
-    let mut outlaw = SpecializationStruct::new(Specialization::Outlaw);
-    let mut  blade_flurry = Spell::create_spell();
-    let mut updates: HashMap<&str, Value> = HashMap::new();
-    updates.insert("name", Value::String("Blade Flurry".to_string()));
-    updates.insert("id", Value::U32(1231));
-    updates.insert("resource", Value::Resources(Resource::Energy));
-    blade_flurry.update_spell(updates);
-    outlaw.add_spell( blade_flurry);
-    
-    println!("{:?}", outlaw);
+    let mut Evoker = Class::new(ClassName::Evoker);
+    println!("{:?}", Evoker);
+   
     println!("{:?}", bloodelf);
     
 

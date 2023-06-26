@@ -1,5 +1,5 @@
 
-use super::*;
+use crate::spells::Spell;
 #[derive(Debug)]
 pub enum Specialization {
     Blood,
