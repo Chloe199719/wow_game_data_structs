@@ -56,22 +56,28 @@ enum ClassName {
 
 
 
+
+use std::collections::HashMap;
+
 use wow_char::races::Race;
 use wow_char::races::RaceTraits;
 use wow_char::SpecializationStruct;
 use wow_char::Specialization;
 use wow_char::Spell;
+use wow_char::Value;
+use wow_char::Resource;
 fn main() {
     let bloodelf  = RaceTraits::new(Race::BloodElf);
     
     let mut outlaw = SpecializationStruct::new(Specialization::Outlaw);
     let mut  blade_flurry = Spell::create_spell();
-    blade_flurry.name = "Blade Flurry".to_string();
-    blade_flurry.description = "Increases your attack speed by 20% and your damage by 20% for 12 sec. While Blade Flurry is active, each time you strike with a melee attack, you will also strike with both weapons, dealing 50% Physical damage to the struck enemy.".to_string();
-    blade_flurry.level = 0;
-    blade_flurry.cooldown = 120;
+    let mut updates: HashMap<&str, Value> = HashMap::new();
+    updates.insert("name", Value::String("Blade Flurry".to_string()));
+    updates.insert("id", Value::U32(1231));
+    updates.insert("resource", Value::Resources(Resource::Energy));
+    blade_flurry.update_spell(updates);
+    outlaw.add_spell( blade_flurry);
     
-
     println!("{:?}", outlaw);
     println!("{:?}", bloodelf);
 

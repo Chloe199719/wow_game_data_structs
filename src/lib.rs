@@ -1,6 +1,8 @@
 #![allow(dead_code)]
 #![allow(unused_variables)]
 
+use std::{ collections::HashMap};
+
 pub mod races;
 #[derive(Debug)]
 pub enum Specialization {
@@ -353,9 +355,9 @@ impl SpecializationStruct {
 }
     
 
-
+#[derive(Clone)]
 #[derive(Debug)]
-enum Resource {
+pub enum Resource {
     Rage,
     Energy,
     Mana,
@@ -374,13 +376,14 @@ enum Resource {
     Runes,
     None,
 }
+
 #[derive(Debug)]
 pub struct Spell {
   pub  id : u32,
  pub name: String,
   pub  description: String,
   pub  level: u8,
-    cooldown: u8,
+  pub  cooldown: u8,
     duration: u8,
     cost: u8,
     range: u8,
@@ -389,56 +392,7 @@ pub struct Spell {
     resource: Resource,
     resource_cost: u32,
     resource_gain: u32,
-    resource_gain_on_crit: u32,
-    resource_gain_on_hit: u32,
-    resource_gain_on_cast: u32,
-    resource_gain_on_kill: u32,
-    resource_gain_on_spell_cast: u32,
-    resource_gain_on_spell_crit: u32,
-    resource_gain_on_spell_hit: u32,
-    resource_gain_on_spell_kill: u32,
-    resource_gain_on_spell_tick: u32,
-    resource_gain_on_tick: u32,
-    resource_gain_on_hit_taken: u32,
-    resource_gain_on_crit_taken: u32,
-    resource_gain_on_dodge: u32,
-    resource_gain_on_parry: u32,
-    resource_gain_on_block: u32,
-    resource_gain_on_resist: u32,
-    resource_gain_on_evade: u32,
-    resource_gain_on_immunity: u32,
-    resource_gain_on_deflect: u32,
-    resource_gain_on_absorb: u32,
-    resource_gain_on_interrupt: u32,
-    resource_gain_on_dispel: u32,
-    resource_gain_on_death: u32,
-
-    resource_gain_on_assist: u32,
-    resource_gain_on_spell_interrupt: u32,
-    resource_gain_on_spell_dispel: u32,
-    resource_gain_on_spell_death: u32,
-   
-    resource_gain_on_spell_assist: u32,
-    resource_gain_on_spell_resist: u32,
-    resource_gain_on_spell_evade: u32,
-    resource_gain_on_spell_deflect: u32,
-    resource_gain_on_spell_absorb: u32,
-    resource_gain_on_spell_immunity: u32,
-    resource_gain_on_spell_block: u32,
-    resource_gain_on_spell_parry: u32,
-    resource_gain_on_spell_dodge: u32,
-    resource_gain_on_spell_crit_taken: u32,
-    resource_gain_on_spell_hit_taken: u32,
-
-    resource_gain_on_tick_taken: u32,
-    resource_gain_on_spell_damage_taken: u32,
-    resource_gain_on_spell_healing_taken: u32,
-    resource_gain_on_damage_taken: u32,
-    resource_gain_on_healing_taken: u32,
-    resource_gain_on_damage: u32,
-    resource_gain_on_healing: u32,
-    resource_gain_on_spell_damage: u32,
-    resource_gain_on_spell_healing: u32,
+  
 
 }
 impl Spell {
@@ -457,65 +411,64 @@ impl Spell {
             resource: Resource::None,
             resource_cost: 0,
             resource_gain: 0,
-            resource_gain_on_crit: 0,
-            resource_gain_on_hit: 0,
-            resource_gain_on_cast: 0,
-            resource_gain_on_kill: 0,
-            resource_gain_on_spell_cast: 0,
-            resource_gain_on_spell_crit: 0,
-            resource_gain_on_spell_hit: 0,
-            resource_gain_on_spell_kill: 0,
-            resource_gain_on_spell_tick: 0,
-            resource_gain_on_tick: 0,
-            resource_gain_on_hit_taken: 0,
-            resource_gain_on_crit_taken: 0,
-            resource_gain_on_dodge: 0,
-            resource_gain_on_parry: 0,
-            resource_gain_on_block: 0,
-            resource_gain_on_resist: 0,
-            resource_gain_on_evade: 0,
-            resource_gain_on_immunity: 0,
-            resource_gain_on_deflect: 0,
-            resource_gain_on_absorb: 0,
-            resource_gain_on_interrupt: 0,
-            resource_gain_on_dispel: 0,
-            resource_gain_on_death: 0,
-        
-            resource_gain_on_assist: 0,
-            resource_gain_on_spell_interrupt: 0,
-            resource_gain_on_spell_dispel: 0,
-            resource_gain_on_spell_death: 0,
-           
-            resource_gain_on_spell_assist: 0,
-            resource_gain_on_spell_resist: 0,
-            resource_gain_on_spell_evade: 0,
-            resource_gain_on_spell_deflect: 0,
-            resource_gain_on_spell_absorb: 0,
-            resource_gain_on_spell_immunity: 0,
-            resource_gain_on_spell_block: 0,
-            resource_gain_on_spell_parry: 0,
-            resource_gain_on_spell_dodge: 0,
-            resource_gain_on_spell_crit_taken: 0,
-            resource_gain_on_spell_hit_taken: 0,
-        
-            resource_gain_on_tick_taken: 0,
-            resource_gain_on_spell_damage_taken: 0,
-            resource_gain_on_spell_healing_taken: 0,
-            resource_gain_on_damage_taken: 0,
-            resource_gain_on_healing_taken: 0,
-            resource_gain_on_damage: 0,
-            resource_gain_on_healing: 0,
-            resource_gain_on_spell_damage: 0,
-            resource_gain_on_spell_healing: 0,
         
         }
     }
     
 }
-
+#[derive(Debug)]
+pub enum Value {
+    U32(u32),
+    String(String),
+    Resources(Resource),
+}
 impl Spell {
-    fn update_spell(&mut self) {
+    /// Requires a hashmap with the following keys: <&str, Value> Valuu can be either a u32 or a String or Resource the key must be one of the following:
+    /// id, name, description, level, cooldown, duration, cost, range, damage, healing, resource, resource_cost, resource_gain
+    pub fn update_spell(&mut self, update: HashMap<&str, Value>) {
+        for (key, value) in update.iter()    {
+            match value {
+                Value::U32(value) => {
+                    match *key {
+                        "id" => self.id = *value,
+                        "level" => self.level = *value as u8,
+                        "cooldown" => self.cooldown = *value as u8,
+                        "duration" => self.duration = *value as u8,
+                        "cost" => self.cost = *value as u8,
+                        "range" => self.range = *value as u8,
+                        "damage" => self.damage = *value,
+                        "healing" => self.healing = *value,
+                 
+                        "resource_cost" => self.resource_cost = *value,
+                        "resource_gain" => self.resource_gain = *value,
+                        _ => continue
+                }}
 
+                Value::String(value) => {
+                    match *key {
+           
+                        "name" => self.name = value.clone(),
+                        "description" => self.description = value.clone(),
+
+           
+                        _ => continue
+                    
+                }
+                
+                }
+                Value::Resources(value) =>{
+                    match *key {
+                        "resource" => self.resource = value.clone(),
+                        _ => continue
+                    }
+                    
+                }
+ 
+            }
+           
+
+
+                // _ => continue
     }
-    
+}
 }
