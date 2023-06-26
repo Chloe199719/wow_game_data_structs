@@ -61,8 +61,8 @@ use std::collections::HashMap;
 
 use wow_char::races::Race;
 use wow_char::races::RaceTraits;
-use wow_char::SpecializationStruct;
-use wow_char::Specialization;
+use wow_char::specs::SpecializationStruct;
+use wow_char::specs::Specialization;
 use wow_char::Spell;
 use wow_char::Value;
 use wow_char::Resource;
@@ -80,7 +80,7 @@ fn main() {
     
     println!("{:?}", outlaw);
     println!("{:?}", bloodelf);
-
+    
 
 
 
