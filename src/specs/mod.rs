@@ -1,5 +1,6 @@
 
 use crate::spells::Spell;
+use crate::talents::Talent;
 #[derive(Debug)]
 pub enum Specialization {
     Blood,
@@ -52,9 +53,11 @@ pub enum Role {
 #[derive(Debug)]
 pub struct SpecializationStruct{
     role: Role,
-    name: Specialization,
+   pub name: Specialization,
     description: String,
     spells: Vec<Spell>,
+    talents: Vec<Talent>,
+    active: bool,
 
 }
 impl SpecializationStruct {
@@ -66,6 +69,8 @@ impl SpecializationStruct {
                 name: Specialization::Subtlety,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
 
             Specialization::RestorationShaman => SpecializationStruct {
@@ -73,6 +78,8 @@ impl SpecializationStruct {
                 name: Specialization::RestorationShaman,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
 
             Specialization::Shadow => SpecializationStruct {
@@ -80,6 +87,8 @@ impl SpecializationStruct {
                 name: Specialization::Shadow,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
 
 
@@ -89,6 +98,8 @@ impl SpecializationStruct {
                     name: Specialization::ProtectionWarrior,
                     description: String::from(""),
                     spells: vec![],
+                    talents: vec![],
+                    active: false,
                 }
             }
             Specialization::Perservation => {
@@ -97,6 +108,8 @@ impl SpecializationStruct {
                     name: Specialization::Perservation,
                     description: String::from(""),
                     spells: vec![],
+                    talents: vec![],
+                    active: false,
                 }
             }
 
@@ -106,6 +119,8 @@ impl SpecializationStruct {
                     name: Specialization::Retribution,
                     description: String::from(""),
                     spells: vec![],
+                    talents: vec![],
+                    active: false,
                 }
             }
 
@@ -114,6 +129,8 @@ impl SpecializationStruct {
                 name: Specialization::ProtectionPaladin,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
 
             Specialization::Windwalker => SpecializationStruct {
@@ -121,6 +138,8 @@ impl SpecializationStruct {
                 name: Specialization::Windwalker,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
 
             Specialization::Outlaw => SpecializationStruct {
@@ -128,6 +147,8 @@ impl SpecializationStruct {
                 name: Specialization::Outlaw,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
 
             Specialization::Mistweaver=> SpecializationStruct {
@@ -135,6 +156,8 @@ impl SpecializationStruct {
                 name: Specialization::Mistweaver,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
             
             Specialization::Survival => SpecializationStruct {
@@ -142,6 +165,8 @@ impl SpecializationStruct {
                 name: Specialization::Survival,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
 
             Specialization::RestorationDruid => SpecializationStruct {
@@ -149,6 +174,8 @@ impl SpecializationStruct {
                 name: Specialization::RestorationDruid,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
 
             Specialization::Vengeance => SpecializationStruct {
@@ -156,6 +183,8 @@ impl SpecializationStruct {
                 name: Specialization::Vengeance,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
 
             Specialization::Unholy => SpecializationStruct {
@@ -163,6 +192,8 @@ impl SpecializationStruct {
                 name: Specialization::Unholy,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
             
 
@@ -171,6 +202,8 @@ impl SpecializationStruct {
                 name: Specialization::Marksmanship,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
 
             Specialization::Elemental => SpecializationStruct {
@@ -178,6 +211,8 @@ impl SpecializationStruct {
                 name: Specialization::Elemental,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
 
             Specialization::Fire => SpecializationStruct {
@@ -185,6 +220,8 @@ impl SpecializationStruct {
                 name: Specialization::Fire,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
 
             Specialization::Destruction => SpecializationStruct{
@@ -192,6 +229,8 @@ impl SpecializationStruct {
                 name: Specialization::Destruction,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
 
             },
         
@@ -202,78 +241,104 @@ impl SpecializationStruct {
                 name: Specialization::Augmentation,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
             Specialization::Affliction => SpecializationStruct {
                 role: Role::Ranged,
                 name: Specialization::Affliction,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
             Specialization::Arms => SpecializationStruct {
                 role: Role::Melee,
                 name: Specialization::Arms,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
             Specialization::Assassination => SpecializationStruct {
                 role: Role::Melee,
                 name: Specialization::Assassination,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
             Specialization::Balance => SpecializationStruct {
                 role: Role::Ranged,
                 name: Specialization::Balance,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
             Specialization::BeastMastery => SpecializationStruct {
                 role: Role::Ranged,
                 name: Specialization::BeastMastery,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
             Specialization::Blood => SpecializationStruct {
                 role: Role::Tank,
                 name: Specialization::Blood,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
             Specialization::Brewmaster => SpecializationStruct {
                 role: Role::Tank,
                 name: Specialization::Brewmaster,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
             Specialization::Demonology => SpecializationStruct {
                 role: Role::Ranged,
                 name: Specialization::Demonology,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
             Specialization::Devastation => SpecializationStruct {
                 role: Role::Melee,
                 name: Specialization::Devastation,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
             Specialization::Discipline => SpecializationStruct {
                 role: Role::Healer,
                 name: Specialization::Discipline,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
             Specialization::Enhancement => SpecializationStruct {
                 role: Role::Melee,
                 name: Specialization::Enhancement,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
             Specialization::Feral => SpecializationStruct {
                 role: Role::Melee,
                 name: Specialization::Feral,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
            
             Specialization::Frost => SpecializationStruct {
@@ -281,48 +346,64 @@ impl SpecializationStruct {
                 name: Specialization::Frost,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
             Specialization::FrostMage => SpecializationStruct {
                 role: Role::Ranged,
                 name: Specialization::FrostMage,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
             Specialization::Fury => SpecializationStruct {
                 role: Role::Melee,
                 name: Specialization::Fury,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
             Specialization::Guardian => SpecializationStruct {
                 role: Role::Tank,
                 name: Specialization::Guardian,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
             Specialization::Havoc => SpecializationStruct {
                 role: Role::Melee,
                 name: Specialization::Havoc,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
             Specialization::HolyPaladin => SpecializationStruct {
                 role: Role::Healer,
                 name: Specialization::HolyPaladin,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
             Specialization::HolyPriest => SpecializationStruct {
                 role: Role::Healer,
                 name: Specialization::HolyPriest,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
             Specialization::Arcane => SpecializationStruct {
                 role: Role::Melee,
                 name: Specialization::Arcane,
                 description: String::from(""),
                 spells: vec![],
+                talents: vec![],
+                active: false,
             },
 
             
@@ -348,5 +429,18 @@ impl SpecializationStruct {
     pub fn edit_description(&mut self, description: String) {
         self.description = description;
     }
+    pub fn get_talents(&self) -> &Vec<Talent> {
+        &self.talents
+    }
+    pub fn add_talent(&mut self, talent: Talent) {
+        self.talents.push(talent);
+    }
+    pub fn get_active(&self) -> &bool {
+        &self.active
+    }
+    pub fn set_active(&mut self, active: bool) {
+        self.active = active;
+    }
+    
 }
   
